@@ -1,5 +1,6 @@
 import p5 from 'p5';
 import marked from 'marked';
+import { isMobile } from './config';
 
 let audio = new Audio(require('./audios/end_credits_royalty_free_music_6793518358239397151.mp3'));
 let capture;
@@ -13,6 +14,11 @@ const canvasOverlay = document.getElementById('canvas-overlay');
 const playBtn = document.getElementById('play-btn');
 const stopBtn = document.getElementById('stop-btn');
 var isPlaying = false;
+
+if (isMobile) {
+    const adContainer = document.getElementById('ad-container');
+    adContainer.parentElement.removeChild(adContainer);
+}
 
 var mde = new SimpleMDE({
     element: textInput,
