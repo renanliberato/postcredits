@@ -5,11 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build ./index.html --no-source-maps --public-url /closingcredits"
+    "build": "parcel build --no-source-maps --public-url /closingcredits ./index.html"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "marked": "^1.2.9",
     "p5": "^1.2.0"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10"
   }
 }

@@ -3,39 +3,46 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <meta property="og:url" content="https://renanliberato.com.br/closingcredits/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Closing credits creator" />
+    <meta property="og:description" content="Have fun on video calls with a closing credits at the end!" />
     <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <link rel="stylesheet" href="./src/styles/new.min.css">
     <link rel="stylesheet" href="./src/styles/index.css">
-    <title>Closing Credits creator</title>
+    <title>Closing credits creator</title>
 </head>
 
 <body style="overflow-y: hidden">
     <div id='canvas-parent'>
     </div>
+    <div style="position: absolute; bottom: -20px; left: 0; right: 0;" id='canvas-overlay'></div>
     <div id='input-container'
-        style="position: absolute; right: 10px; top: 10px; bottom: 10px; width: calc(30vw); background-color: white; border-radius: 5px; overflow-y: auto; padding: 20px;">
-        <label>Cast</label>
-        <textarea id='cast-input' style="height: 200px;">Beatriz
-Renan
-Marc
-Julliet
-Lucas</textarea>
-        <label>Offered by</label>
-        <input id='offered-input' value='My beautiful company' />
+        style="position: absolute; right: 10px; top: 10px; bottom: 10px; background-color: white; border-radius: 5px; overflow-y: auto; padding: 20px;">
+        <div style="flex: 1;overflow-y: auto; margin-bottom: 10px;"><textarea id='text-input'># cast
+- Beatriz
+- Renan
+- Marc
+- Julliet
+- Lucas
+
+# Offered to you by
+Our beautiful company</textarea></div>
+            <p style="font-size: 12px; text-align: center;">Created by <a target="_blank" href="https://renanliberato.com.br">Renan Liberato</a>. Have fun!</p>
         <button id='play-btn' style="width: 100%; height: 40px;">Play</button>
     </div>
     <button id='stop-btn' style="position: absolute; top: 10px; right: -100px;">Stop</button>
-    <div id='ad-container'>
+    <!-- <div id='ad-container'>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- pixelengine -->
         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9957018559956996"
             data-ad-slot="6002834200" data-ad-format="auto" data-full-width-responsive="true"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
-    </div>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+    </div> -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CN01CLG8B"></script>
     <script>
         if (!document.location.href.includes("localhost")) {
@@ -49,5 +56,6 @@ Lucas</textarea>
             gtag('config', 'G-5CN01CLG8B');
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
     <script src="./src/index.js"></script>
 </body>

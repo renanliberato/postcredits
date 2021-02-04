@@ -1,4 +1,5 @@
 import p5 from 'p5';
+import marked from 'marked';
 
 let audio = new Audio(require('./audios/end_credits_royalty_free_music_6793518358239397151.mp3'));
 let capture;
@@ -7,14 +8,18 @@ let ctx;
 let width = window.innerWidth;
 let height = window.innerHeight;
 const inputContainer = document.getElementById('input-container');
+const textInput = document.getElementById('text-input');
+const canvasOverlay = document.getElementById('canvas-overlay');
 const playBtn = document.getElementById('play-btn');
 const stopBtn = document.getElementById('stop-btn');
-const castInput = document.getElementById('cast-input');
-const offeredInput = document.getElementById('offered-input');
-var texts = [];
 var isPlaying = false;
 
-const initialY = height + 20;
+var mde = new SimpleMDE({
+    element: textInput,
+    toolbar: ['bold', 'italic', 'heading'],
+    status: false
+});
+
 playBtn.onclick = () => {
     goFullScreen();
 
@@ -22,27 +27,8 @@ playBtn.onclick = () => {
     audio.loop = true;
 
     isPlaying = true;
-    var y = initialY;
-    texts = [
-        { text: 'Cast', y: y },
-        ...castInput.value.split('\n').map(t => ({
-            text: t,
-            y: y = y += 50
-        })),
-    ];
-
-    texts = [
-        ...texts,
-        {
-            y: y = y += 100,
-            text: 'Offered to you by'
-        },
-        {
-            y: y = y += 50,
-            text: offeredInput.value
-        },
-        ,
-    ];
+    canvasOverlay.innerHTML = marked(mde.value());
+    canvasOverlay.style.bottom = `${-1 * (canvasOverlay.offsetHeight + 20)}px`;
 
     stopBtn.style.visibility = 'visible';
     var intervalToHideContainer = setInterval(() => {
@@ -75,9 +61,8 @@ stopBtn.onclick = () => {
     exitFullScreen();
 
     isPlaying = false;
-    texts = [];
-
-    stopBtn.style.visibility = 'hidden';
+    canvasOverlay.style.bottom = '-20px';
+    canvasOverlay.innerHTML = '';
 
     var intervalToHideButton = setInterval(() => {
         stopBtn.style.right = `${parseInt(stopBtn.style.right) - 10}px`;
@@ -113,6 +98,8 @@ function goFullScreen() {
 }
 
 function exitFullScreen() {
+    if (!document.fullscreenElement)
+        return;
 
     if (document.exitFullscreen) {
         document.exitFullscreen();
@@ -159,10 +146,7 @@ const sketch = (s) => {
         s.image(capture, 0, 0, width, height);
 
         if (isPlaying) {
-            texts.forEach(t => {
-                s.text(t.text, width / 2, t.y);
-                t.y -= 1;
-            });
+            canvasOverlay.style.bottom = `${parseInt(canvasOverlay.style.bottom) + 1}px`;
         }
     }
 }

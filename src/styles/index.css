@@ -15,6 +15,10 @@ body, div {
     flex-direction: column;
 }
 
+.editor-toolbar {
+    display: block;
+}
+
 * {
     -webkit-touch-callout: none;
     /* iOS Safari */
@@ -36,16 +40,58 @@ body, div {
     src: url(../fonts/PressStart2P-Regular.ttf) format("truetype");
 }
 
-* {
-    font-family: 'Press Start 2P' !important
+@font-face {
+    font-family: "American Captain";
+    src: url(../fonts/AmericanCaptain-MdEY.otf) format("opentype");
+}
+
+button, a, p {
+    font-family: 'Press Start 2P'
+}
+
+#canvas-overlay * {
+    font-family: 'American Captain';
 }
 
 body {
     max-width: 100vw;
 }
 
+#canvas-overlay {
+    align-items: center;
+    transform: scale(2, 2);
+}
+
+#canvas-overlay table {
+    width: auto;
+    align-self: center;
+    border-color: transparent;
+}
+
+#canvas-overlay th, tr, td {
+    background: transparent!important;
+    border: none;
+}
+
+#canvas-overlay * {
+    color: white;
+    text-align: center;
+    border-bottom: none;
+    text-decoration: none;
+    list-style: none;
+    padding-left: 0;
+    text-shadow: 2px 2px #000000;
+}
+
+#input-container {
+    width: 300px;
+}
+
 @media (max-width: 700px) {
     body {
         max-width: 100vw;
+    }
+    #input-container {
+        width: calc(100vw - 60px);
     }
 }
